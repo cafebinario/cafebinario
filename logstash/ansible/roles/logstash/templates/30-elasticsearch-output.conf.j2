@@ -1,6 +1,6 @@
 output {
   elasticsearch { 
-      hosts => ["https://search-test-xu5xub3tgqhk7jocsrquqdd7nu.us-east-1.es.amazonaws.com"]
+      hosts => ["{{ es_host }}"]
       index => "syslog-%{+YYYY.MM.dd}"
       document_type => "system_logs"
   }
