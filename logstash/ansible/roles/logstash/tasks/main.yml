@@ -1,0 +1,66 @@
+---
+
+- name: Add Elasticsearch apt key.
+  apt_key:
+    url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+    state: present
+  become: true
+  
+- name: Add Logstash repository.
+  apt_repository:
+    repo: 'deb http://packages.elasticsearch.org/logstash/{{ logstash_version }}/debian stable main'
+    state: present
+  become: true
+
+- name: Check if Logstash is already installed.
+  stat: path=/etc/init.d/logstash
+  register: logstash_installed
+  become: true
+
+- name: Update apt cache if repository just added.
+  apt: update_cache=yes
+  when: logstash_installed.stat.exists == false
+  become: true
+
+- name: Install Java.
+  apt:
+    pkg: openjdk-8-jre
+    state: present
+  become: true
+
+- name: Install Logstash.
+  apt:
+    pkg: logstash
+    state: present
+  notify: logstash enabled
+  become: true
+
+- name: "Config filebeat streaming to logstash."
+  template: src=02-syslog-input.conf.j2
+            dest=/etc/logstash/conf.d/02-syslog-input.conf
+            owner=root
+            group=root
+            mode=0644
+  sudo: yes
+
+- name: "Config systemlog to logstash."
+  template: src=10-syslog-filter.conf.j2
+            dest=/etc/logstash/conf.d/10-syslog-filter.conf
+            owner=root
+            group=root
+            mode=0644
+  notify: logstash started
+  sudo: yes
+
+- name: "Config systemlog to logstash."
+  template: src=30-elasticsearch-output.conf.j2
+            dest=/etc/logstash/conf.d/30-elasticsearch-output.conf
+            owner=root
+            group=root
+            mode=0644
+  notify: logstash started
+  sudo: yes
+
+- name: "Config user logstash for access logs"
+  command: sudo usermod -a -G adm logstash 
+  sudo: yes

@@ -1,0 +1,11 @@
+---
+
+- name: logstash started
+  service: name=logstash state=started enabled=yes
+  tags: logstash
+  sudo: yes
+
+- name: logstash enabled
+  command: systemctl enable logstash
+  tags: logstash
+  sudo: yes
