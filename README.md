@@ -6,5 +6,7 @@ Esperamos que vocês aproveitem ao máximo e se sintam contemplados com os assun
 
 https://www.youtube.com/watch?v=O5loj9FV6sQ
 
-## Café Binário #01 - ELK + Hashicorp Tools + Amazon EC2
+## Café Binário #01 - ELK + Hashicorp Tools + Amazon
+
+https://www.youtube.com/watch?v=izmLcUV__rw
 
