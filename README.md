@@ -6,5 +6,5 @@ Esperamos que vocês aproveitem ao máximo e se sintam contemplados com os assun
 
 https://www.youtube.com/watch?v=O5loj9FV6sQ
 
-## Café Binário #01 - Elk+Hashicorp+Aws
+## Café Binário #01 - ELK+HASHICORP+AMAZON EC2
 
