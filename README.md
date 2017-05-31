@@ -10,3 +10,6 @@ https://www.youtube.com/watch?v=O5loj9FV6sQ
 
 https://www.youtube.com/watch?v=izmLcUV__rw
 
+## Caf√©Bin√rio #02 - Terraform + Amazon RDS
+
+https://www.youtube.com/watch?v=rhO6zC3T-QM
