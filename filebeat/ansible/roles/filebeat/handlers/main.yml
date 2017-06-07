@@ -1,0 +1,11 @@
+---
+
+- name: filebeat started
+  service: name=filebeat state=started enabled=yes
+  tags: filebeat
+  sudo: yes
+
+- name: filebeat enabled
+  command: systemctl enable filebeat
+  tags: filebeat
+  sudo: yes

@@ -1,0 +1,47 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "base_ami": "ami-6edd3078"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{ user `aws_access_key` }}",
+      "secret_key": "{{ user `aws_secret_key` }}",
+      "region": "us-east-1",
+      "instance_type": "t2.micro",
+      "source_ami": "{{ user `base_ami` }}",
+      "ssh_username": "ubuntu",
+      "ami_name": "filebeat-{{ isotime \"2006-01-02-150405\" }}",
+      "ami_description": "filebeat-{{ isotime \"2006-01-02-150405\" }}",
+      "tags": {
+        "Name": "filebeat-{{ user `base_ami` }}-{{ isotime \"2006-01-02-150405\" }}",
+        "BaseAMI": "{{ user `base_ami` }}"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt-get install -y python-pip python-dev libssl-dev",
+        "export LC_ALL=C",
+        "sudo pip install pip --upgrade",
+        "sudo pip install ansible --upgrade"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "playbook.yml",
+      "inventory_file": "ansible/hosts",
+      "extra_arguments": [
+        "--limit localhost"
+      ],
+      "role_paths": [
+        "ansible/roles/filebeat"
+      ]
+    }
+  ]
+}

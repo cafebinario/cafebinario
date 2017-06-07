@@ -1,0 +1,28 @@
+---
+
+- name: Add Elasticsearch apt key.
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+  become: true
+  
+- name: Add Elasticsearch repository.
+  apt_repository:
+    repo: "{{ elastic_repo }}"
+    state: present
+  become: true
+
+- name: Install Filebeat.
+  apt:
+    pkg: filebeat
+    state: present
+  notify: filebeat enabled
+  become: true
+
+- name: "Config filebeat streaming to elasticsearch."
+  template: src=filebeat.yml.j2
+            dest=/etc/filebeat/filebeat.yml
+            owner=root
+            group=root
+            mode=0644
+  sudo: yes

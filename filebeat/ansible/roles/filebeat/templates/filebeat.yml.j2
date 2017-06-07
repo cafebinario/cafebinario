@@ -1,0 +1,12 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /var/log/*.log
+    - /var/log/*/*.log
+    - /var/log/*
+    - /var/log/*/*
+    - /var/log/**/*
+output.elasticsearch:
+  hosts: ["https://search-es-test-wfgpyhbn4fl7uo3oeie3t36a7y.us-east-1.es.amazonaws.com:443"]
+  index: "filebeat"
+  protocol: "https"
