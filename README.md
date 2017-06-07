@@ -11,3 +11,7 @@ https://www.youtube.com/watch?v=izmLcUV__rw
 ## Café Binário #02 - Terraform + Amazon RDS
 
 https://www.youtube.com/watch?v=rhO6zC3T-QM
+
+## Café Binário #03 - Filebeat + Elasticsearch
+
+https://www.youtube.com/watch?v=0XcPFaz2PIE
